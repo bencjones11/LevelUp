@@ -26,6 +26,8 @@ $(document).ready(function(){
 	  console.log("pressed button!");
   });
   
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+  $('.modal').modal();
 
 	
 });
@@ -51,7 +53,7 @@ var fn = { getHtml() {
             assigns_html += "</p>";
             assigns_html += `</div>
                                         <div class="card-action">
-                                          <a href="assignment.html">Start</a>
+                                          <a href="#modal1">Start</a>
                                         </div>
                                       </div>
                                     </div>`;
@@ -82,7 +84,4 @@ methods: {
 
 })
 
-$(document).ready(function(){
-  // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-  $('.modal').modal();
-});
+
