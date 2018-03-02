@@ -53,7 +53,7 @@ var fn = { getHtml() {
             assigns_html += "</p>";
             assigns_html += `</div>
                                         <div class="card-action">
-                                          <a href="#modal1">Start</a>
+                                          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Start</a>
                                         </div>
                                       </div>
                                     </div>`;
