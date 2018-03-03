@@ -3,10 +3,10 @@ var all_assigns = [];
 
 
 $(document).ready(function(){ 
-	var assign1 = {id:1, title:"Task 1", description:"Write an essay!", required:true, points:50};
-	var assign2 = {id:2, title:"Task 2", description:"Write another essay!", required:true, points:50};
-	var assign3 = {id:3, title:"Quiz", description:"Take a quiz!", required:false, points:20};
-	var assign4 = {id:4, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20};
+	var assign1 = {id:1, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false};
+	var assign2 = {id:2, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false};
+	var assign3 = {id:3, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false};
+	var assign4 = {id:4, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false};
 	
 	all_assigns.push(assign1);
 	all_assigns.push(assign2);
@@ -32,37 +32,28 @@ $(document).ready(function(){
 
 var fn = { getHtml() {
 	var assigns_html = ""
-	for(j=0; j<Math.floor((all_assigns.length + 3)/4); j++){
-	  
-        assigns_html += "<div class=\"row\">\n";
-        for(i=0; i<4; i++){
-            if(i+4*j >= all_assigns.length){
-                break;
-            }
-            var curr_assign = all_assigns[i+4*j];
-            assigns_html += `<div class="col s3">
-                                      <div class="card grey darken-1">
-                                        <div class="card-content white-text">
-                                          <span class="card-title">`;
-            assigns_html += curr_assign.title;
-            if(curr_assign.required){
-                assigns_html += "<img src=\"key.png\" height=\"27px\" style=\"float: right;\">";
-            }
-            assigns_html += "</span>\n";
-            assigns_html += "<p>";
-            assigns_html += curr_assign.description;
-            assigns_html += "</p>";
-            assigns_html += `</div>
-                                        <div class="card-action">
-                                          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Start</a>
-                                        </div>
-                                      </div>
-                                    </div>`;
-		   
-	  }
-  
-	  assigns_html += "</div>";
-	}
+
+    for(i=0; i<all_assigns.length; i++){
+        var curr_assign = all_assigns[i];
+        assigns_html += `<div class="col-md-3">
+                                  <div class="card grey darken-1">
+                                    <div class="card-content white-text">
+                                      <span class="card-title">`;
+        assigns_html += curr_assign.title;
+        if(curr_assign.required){
+            assigns_html += "<img src=\"key.png\" height=\"27px\" style=\"float: right;\">";
+        }
+        assigns_html += "</span>\n";
+        assigns_html += "<p>";
+        assigns_html += curr_assign.description;
+        assigns_html += "</p>";
+        assigns_html += `</div>
+                                    <div class="card-action">
+                                      <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Start</a>
+                                    </div>
+                                  </div>
+                                </div>`;
+    }
   
 	return assigns_html;
 	}
@@ -73,6 +64,7 @@ var app = new Vue({
   data: {
     locked: true,
     points: 0,
+    keys: 0
 },
 methods: {
     submitAssign: function() {

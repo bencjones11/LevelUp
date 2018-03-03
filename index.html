@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-	
+        <link rel="stylesheet" href="index.css">
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <meta charset="utf-8">
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         
         
         <title>LevelUp</title>
@@ -26,7 +27,7 @@
                     <div class="card-panel light blue lighten-2">
                       <span class="white-text"> Level 1 <br>
                         <a class="waves-effect waves-light btn" id="create-assignment-lvl1">Create assignment</a>
-                        <div id="assignments-container">
+                        <div class="row" id="assignments-container">
                           
 
                         </div>
@@ -35,6 +36,7 @@
                   </div>
                 </div>
         </div>
+       
 
         <div id="modal1" class="modal">
           <div class="modal-content">
@@ -53,7 +55,7 @@
                     <div class="row">
                       <div class="col s12">
                         <div class="card-panel grey darken-2">
-                          <span class="white-text">Level 2 is locked! {{points}}/20 points 0/2 keys
+                          <span class="white-text">Level 2 is locked! {{points}}/20 points {{keys}}/2 keys
                           </span>
                         </div>
                       </div>
