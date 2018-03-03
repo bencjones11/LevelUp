@@ -45,6 +45,9 @@ var fn = { getHtml() {
                                         <div class="card-content white-text">
                                           <span class="card-title">`;
             assigns_html += curr_assign.title;
+            if(curr_assign.required){
+                assigns_html += "<img src=\"key.png\" height=\"27px\" style=\"float: right;\">";
+            }
             assigns_html += "</span>\n";
             assigns_html += "<p>";
             assigns_html += curr_assign.description;
