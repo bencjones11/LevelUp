@@ -7,13 +7,11 @@ $(document).ready(function(){
 	var assign2 = {id:2, title:"Task 2", description:"Write another essay!", required:true, points:50};
 	var assign3 = {id:3, title:"Quiz", description:"Take a quiz!", required:false, points:20};
 	var assign4 = {id:4, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20};
-	var assign5 = {id:5, title:"Quiz5", description:"Take an alternative quiz!", required:false, points:20};
 	
 	all_assigns.push(assign1);
 	all_assigns.push(assign2);
 	all_assigns.push(assign3);
 	all_assigns.push(assign4);
-	//all_assigns.push(assign5);
 	
   
   
@@ -79,6 +77,7 @@ methods: {
         if (this.points === 20) {
             this.locked = false;
         }
+        
     }
 }
 
