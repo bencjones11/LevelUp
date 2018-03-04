@@ -5,9 +5,15 @@ $(document).ready(function(){
 
 
 
-Vue.component('assignments', {
-  props: ['entry', 'isrequired'],
-  template:"#assignment-template"
+var assignmentComponent = Vue.component('assignments', {
+  props: ['entry', 'id', 'isrequired', 'submitted'],
+  template:"#assignment-template",
+  methods: {
+    openAssign() {
+        console.log("pressed open assignment button on id=%i!", this.id);
+        this.$emit('update-curr-open-assignment-id', this.id);
+    }
+  }
 })
 
 
@@ -18,24 +24,35 @@ var app = new Vue({
     points: 0,
     keys: 0,
     assignmentList: [
-      {id:1, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false},
-	  {id:2, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false},
-	  {id:3, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false},
-	  {id:4, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false}
+      {id:0, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false},
+	  {id:1, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false},
+	  {id:2, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false},
+	  {id:3, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false}
     ],
-    currAssignId: 5
+    newestAssignId: 4,
+    currOpenAssignmentId: -1
   },
   methods: {
-    submitAssign: function() {
-        this.points = this.points +5;
-        if (this.points === 20) {
+    submitAssign(){
+        console.log("submit clicked!!");
+        
+        var currAssign = this.assignmentList[this.currOpenAssignmentId];
+        this.points += currAssign.points;
+        if(currAssign.required){
+            this.keys += 1;
+        }
+        currAssign.submitted = true;
+        if (this.points >= 20 && this.keys >= 2) {
             this.locked = false;
         }
-        console.log("submit clicked!!");
     },
-    createAssign: function() {
-        this.assignmentList.push({id:this.currAssignId++, title:"Task 5", description:"Just do... something", required:false, points:5, submitted:false});
+    createAssign(){
+        this.assignmentList.push({id:this.newestAssignId++, title:"Task 5", description:"Just do... something", required:false, points:5, submitted:false});
         console.log("pressed create button!");
+    },
+    updateCurrOpenAssignmentId: function (arg) {
+        console.log("caught event!");
+        this.currOpenAssignmentId = arg;
     }
   }
 
