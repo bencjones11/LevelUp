@@ -1,80 +1,43 @@
-var all_assigns = [];
 
-
-
-$(document).ready(function(){ 
-	var assign1 = {id:1, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false};
-	var assign2 = {id:2, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false};
-	var assign3 = {id:3, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false};
-	var assign4 = {id:4, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false};
-	
-	all_assigns.push(assign1);
-	all_assigns.push(assign2);
-	all_assigns.push(assign3);
-	all_assigns.push(assign4);
-	
-  
-  
-  $("#assignments-container").html(fn.getHtml());
-  
-  $("#create-assignment-lvl1").click(function(){
-	  all_assigns.push({id:5, title:"Task 5", description:"Just do... something", required:false, points:5});
-
-	  $("#assignments-container").html(fn.getHtml());
-	  console.log("pressed button!");
-  });
-  
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-  $('.modal').modal();
-
-	
+$(document).ready(function(){ 	
+    $('.modal').modal();
 });
 
-var fn = { getHtml() {
-	var assigns_html = ""
 
-    for(i=0; i<all_assigns.length; i++){
-        var curr_assign = all_assigns[i];
-        assigns_html += `<div class="col-md-3">
-                                  <div class="card grey darken-1">
-                                    <div class="card-content white-text">
-                                      <span class="card-title">`;
-        assigns_html += curr_assign.title;
-        if(curr_assign.required){
-            assigns_html += "<img src=\"key.png\" height=\"27px\" style=\"float: right;\">";
-        }
-        assigns_html += "</span>\n";
-        assigns_html += "<p>";
-        assigns_html += curr_assign.description;
-        assigns_html += "</p>";
-        assigns_html += `</div>
-                                    <div class="card-action">
-                                      <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Start</a>
-                                    </div>
-                                  </div>
-                                </div>`;
-    }
-  
-	return assigns_html;
-	}
-}
+
+Vue.component('assignments', {
+  props: ['entry'],
+  template:"#assignment-template"
+})
+
 
 var app = new Vue({
   el: '#app',
   data: {
     locked: true,
     points: 0,
-    keys: 0
-},
-methods: {
+    keys: 0,
+    assignmentList: [
+      {id:1, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false},
+	  {id:2, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false},
+	  {id:3, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false},
+	  {id:4, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false}
+    ],
+    currAssignId: 5
+  },
+  methods: {
     submitAssign: function() {
         this.points = this.points +5;
         if (this.points === 20) {
             this.locked = false;
         }
-        
+        console.log("submit clicked!!");
+    },
+    createAssign: function() {
+        this.assignmentList.push({id:this.currAssignId++, title:"Task 5", description:"Just do... something", required:false, points:5, submitted:false});
+        console.log("pressed create button!");
     }
-}
+  }
 
 })
 
