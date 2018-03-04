@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 
 Vue.component('assignments', {
-  props: ['entry'],
+  props: ['entry', 'isrequired'],
   template:"#assignment-template"
 })
 
