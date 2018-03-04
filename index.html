@@ -193,6 +193,7 @@
                     </div>
                     <div class="card-action">
                       <a class="waves-effect waves-light btn modal-trigger" href="#modal1" v-on:click="openAssign">Start</a>
+                      <div style="float: right;">0/{{entry.points}}</div>
                     </div>
                 </div>
                 <div class="card green darken-1" v-else>
@@ -207,6 +208,7 @@
                     </div>
                     <div class="card-action">
                       <a class="waves-effect waves-light btn modal-trigger" href="#modal1" v-on:click="openAssign">Retry</a>
+                      <div style="float: right;">{{entry.points}}/{{entry.points}}</div>
                     </div>
                 </div>
             </div>

@@ -37,10 +37,14 @@ var app = new Vue({
         console.log("submit clicked!!");
         
         var currAssign = this.assignmentList[this.currOpenAssignmentId];
-        this.points += currAssign.points;
-        if(currAssign.required){
-            this.keys += 1;
+        
+        if(!currAssign.submitted){
+            this.points += currAssign.points;
+            if(currAssign.required){
+                this.keys += 1;
+            }
         }
+
         currAssign.submitted = true;
         if (this.points >= 20 && this.keys >= 2) {
             this.locked = false;
