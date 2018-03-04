@@ -33,7 +33,7 @@ var app = new Vue({
     currOpenAssignmentId: -1
   },
   methods: {
-    submitAssign(){
+    submitAssign() {
         console.log("submit clicked!!");
         
         var currAssign = this.assignmentList[this.currOpenAssignmentId];
@@ -50,11 +50,11 @@ var app = new Vue({
             this.locked = false;
         }
     },
-    createAssign(){
+    createAssign() {
         this.assignmentList.push({id:this.newestAssignId++, title:"Task 5", description:"Just do... something", required:false, points:5, submitted:false});
         console.log("pressed create button!");
     },
-    updateCurrOpenAssignmentId: function (arg) {
+    updateCurrOpenAssignmentId(arg) {
         console.log("caught event!");
         this.currOpenAssignmentId = arg;
     }
