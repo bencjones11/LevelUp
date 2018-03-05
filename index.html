@@ -82,7 +82,11 @@
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel grey darken-2">
-                      <span class="white-text">Level 2 is locked! {{points}}/{{pointsToUnlock}} points, {{keysToUnlock}} keys needed <img src="ghostKey.png" height="27px"> <img src="ghostKey.png" height="27px">
+                      <span class="white-text">
+                      
+                      <span v-for="n in keys"> <img src="key.png" height="27px"> </span>
+                      <span v-for="n in (keysToUnlock-keys)"> <img src="ghostKey.png" height="27px"> </span>
+                      {{points}}/{{pointsToUnlock}} 
                       </span>
                     </div>
                   </div>
@@ -234,28 +238,33 @@
     
     <template id="create-assignment-template">
             <div>
-               <div class="modal-content">
-                  <!-- @submit handles any form of submission. -->
-                  <!-- .prevent keeps the event from bubbling around and doing anything else. -->
-                  <form @submit.prevent="createAssign">
-                    <label>
-                      Title:
-                      <input type="text" v-model="title"/>
-                    </label>
-                    <label>
-                      Description:
-                      <input type="text" v-model="desc"/>
-                    </label>
-                    <label>
-                      Points:
-                      <input type="number" step="1" v-model="points"/>
-                    </label>
-                    <p>
-                      <input type="checkbox" id="requiredCheck" v-model="required"/>
-                      <label for="requiredCheck">Main Quest (required)?</label>
-                    </p>
-                    <button type="submit" href="#!">Create</button>
-                  </form>
+                <div class="modal-content">
+                    <!-- @submit handles any form of submission. -->
+                    <!-- .prevent keeps the event from bubbling around and doing anything else. -->
+                    <form @submit.prevent="createAssign">
+
+                        <div class="input-field col s6">
+                            <label class="active" for="title-input">Title</label>
+                            <input id="title-input" type="text" value="New Quest" v-model="title"/>
+                        </div>
+                            
+                        <div class="input-field col s6">
+                            <label class="active" for="desc-input">Description</label>
+                            <textarea class="materialize-textarea" id="desc-input" value="Slay the Quiz Dragon!!" v-model="desc"></textarea>
+                        </div>
+                        
+                        
+                        <div class="input-field col s6">
+                          <label class="active" for="points-input">Points</label>
+                          <input id="points-input" type="number" value="10" step="1" v-model="points"/>
+                        </div>
+                        
+                        <p>
+                          <input type="checkbox" id="requiredCheck" v-model="required"/>
+                          <label for="requiredCheck">Main Quest (required)?</label>
+                        </p>
+                        <button type="submit"  class="modal-action modal-close waves-effect waves-green btn-flat">Create</button>
+                    </form>
               </div>
               <!-- <div class="modal-footer"> -->
                 <!-- <a v-on:click = "submitAssign" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a> -->
