@@ -5,13 +5,33 @@ $(document).ready(function(){
 
 
 
-var assignmentComponent = Vue.component('assignments', {
+Vue.component('assignments', {
   props: ['entry', 'id', 'isrequired', 'submitted'],
   template:"#assignment-template",
   methods: {
     openAssign() {
         console.log("pressed open assignment button on id=%i!", this.id);
         this.$emit('update-curr-open-assignment-id', this.id);
+    }
+  }
+})
+
+Vue.component('create-assignment', {
+  data() {
+    return {
+      
+        title: '',
+        desc: '',
+        points: '',
+        required: ''
+      
+    }
+  },
+  template:"#create-assignment-template",
+  methods: {
+    createAssign() {
+        console.log("pressed create assignment button with title=%s!", this.title);
+        this.$emit('create-assignment', this.title, this.desc, parseInt(this.points), this.required);
     }
   }
 })
@@ -23,6 +43,8 @@ var app = new Vue({
     locked: true,
     points: 0,
     keys: 0,
+    pointsToUnlock: 120,
+    keysToUnlock: 2,
     assignmentList: [
       {id:0, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false},
 	  {id:1, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false},
@@ -46,12 +68,16 @@ var app = new Vue({
         }
 
         currAssign.submitted = true;
-        if (this.points >= 20 && this.keys >= 2) {
+        if (this.points >= this.pointsToUnlock && this.keys >= this.keysToUnlock) {
             this.locked = false;
         }
     },
-    createAssign() {
-        this.assignmentList.push({id:this.newestAssignId++, title:"Task 5", description:"Just do... something", required:false, points:5, submitted:false});
+    addNewAssign(newTitle, newdesc, newpoints, newrequired) {
+        this.assignmentList.push({id:this.newestAssignId++, title:newTitle, description:newdesc, required:newrequired, points:newpoints, submitted:false});
+        if(newrequired){
+            this.keysToUnlock++;
+            this.pointsToUnlock += newpoints;
+        }
         console.log("pressed create button!");
     },
     updateCurrOpenAssignmentId(arg) {

@@ -7,7 +7,7 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
         
         
         <title>LevelUp</title>
@@ -26,7 +26,7 @@
               <div class="col s12">
                 <div class="card-panel light blue lighten-2">
                   <span class="white-text"> Level 1 <br>
-                    <a class="waves-effect waves-light btn" id="create-assignment-lvl1" v-on:click="createAssign">Create assignment</a>
+                    <a class="waves-effect waves-light btn" id="create-assignment-lvl1" href="#create-assignment-modal">Create assignment</a>
                     <div class="row">
                         <assignments
                           v-for="item in assignmentList"
@@ -56,6 +56,12 @@
             <a v-on:click = "submitAssign" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
           </div>
         </div>
+        
+        <div id="create-assignment-modal" class="modal">
+            <create-assignment
+              v-on:create-assignment="addNewAssign">
+            </create-assignment>
+        </div>
 
 
         <span v-if="locked">
@@ -64,7 +70,7 @@
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel grey darken-2">
-                      <span class="white-text">Level 2 is locked! {{points}}/20 points {{keys}}/2 keys
+                      <span class="white-text">Level 2 is locked! {{points}}/{{pointsToUnlock}} points {{keys}}/{{keysToUnlock}} keys
                       </span>
                     </div>
                   </div>
@@ -180,7 +186,7 @@
     </div>
         
     <template id="assignment-template">
-        <div class="col-md-3">
+        <div class="col s3">
             <div class="card grey darken-1" v-if="!submitted">
                 <div class="card-content white-text">
                     <span class="card-title">
@@ -212,6 +218,37 @@
                 </div>
             </div>
         </div>
+    </template>
+    
+    <template id="create-assignment-template">
+            <div>
+               <div class="modal-content">
+                  <!-- @submit handles any form of submission. -->
+                  <!-- .prevent keeps the event from bubbling around and doing anything else. -->
+                  <form @submit.prevent="createAssign">
+                    <label>
+                      Title:
+                      <input type="text" v-model="title"/>
+                    </label>
+                    <label>
+                      Description:
+                      <input type="text" v-model="desc"/>
+                    </label>
+                    <label>
+                      Points:
+                      <input type="number" step="1" v-model="points"/>
+                    </label>
+                    <p>
+                      <input type="checkbox" id="requiredCheck" v-model="required"/>
+                      <label for="requiredCheck">Main Quest (required)?</label>
+                    </p>
+                    <button type="submit" href="#!">Create</button>
+                  </form>
+              </div>
+              <!-- <div class="modal-footer"> -->
+                <!-- <a v-on:click = "submitAssign" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a> -->
+              <!-- </div> -->
+          </div>
     </template>
         
 
