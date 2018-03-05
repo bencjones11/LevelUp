@@ -52,6 +52,18 @@
             <h4>Assignment Title</h4>
             <p>Assignment Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
+            <div class = "container">
+            <form>                    
+                <div class="input-field col s12">
+                <select>
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="1">Half Credit</option>
+                  <option value="2">Full Credit</option>
+                </select>
+                <label>How much credit?</label>
+              </div>
+            </form>
+            </div>
           <div class="modal-footer">
             <a v-on:click = "submitAssign" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
           </div>
@@ -70,7 +82,7 @@
                 <div class="row">
                   <div class="col s12">
                     <div class="card-panel grey darken-2">
-                      <span class="white-text">Level 2 is locked! {{points}}/{{pointsToUnlock}} points {{keys}}/{{keysToUnlock}} keys
+                      <span class="white-text">Level 2 is locked! {{points}}/{{pointsToUnlock}} points, {{keysToUnlock}} keys needed <img src="ghostKey.png" height="27px"> <img src="ghostKey.png" height="27px">
                       </span>
                     </div>
                   </div>
@@ -250,6 +262,15 @@
               <!-- </div> -->
           </div>
     </template>
+        
+
+
+
+
+       
+
+        
+        
         
 
 
