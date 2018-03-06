@@ -1,5 +1,5 @@
 
-$(document).ready(function(){ 	
+$(document).ready(function(){
     $('.modal').modal();
     $('select').material_select();
 });
@@ -20,12 +20,12 @@ Vue.component('assignments', {
 Vue.component('create-assignment', {
   data() {
     return {
-      
+
         title: '',
         desc: '',
         points: '',
         required: ''
-      
+
     }
   },
   template:"#create-assignment-template",
@@ -42,6 +42,7 @@ var app = new Vue({
   el: '#app',
   data: {
     locked: true,
+    credit: true,
     points: 0,
     keys: 0,
     pointsToUnlock: 120,
@@ -59,11 +60,24 @@ var app = new Vue({
   methods: {
     submitAssign() {
         console.log("submit clicked!!");
-        
+
         var currAssign = this.assignmentList[this.currOpenAssignmentId];
-        
+        var remPoints = this.assignmentList[this.currOpenAssignmentId];
+        if(currAssign.submitted === true) {
+            if(this.credit === true) {
+                this.points = this.points + (currAssign.points / 2);
+            }
+            else {
+                this.points = this.points  + (currAssign.points / 4);
+            }
+        }
         if(!currAssign.submitted){
-            this.points += currAssign.points;
+            if(this.credit === true) {
+                this.points += currAssign.points;
+            }
+            else {
+                this.points = this.points + (currAssign.points / 2);
+            }
             if(currAssign.required){
                 this.keys += 1;
             }
@@ -90,6 +104,14 @@ var app = new Vue({
     },
     calculateNewExpBarPercentage() {
         this.expBarPercent = Math.floor((this.points/this.pointsToUnlock)*100).toString() + "%";
+    },
+    halfCredit() {
+        this.credit = false;
+        console.log("halfCredit was chosen!");
+    },
+    fullCredit() {
+        this.credit = true;
+        console.log("fullCredit was chosen!");
     }
   }
 
