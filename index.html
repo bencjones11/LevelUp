@@ -84,8 +84,16 @@
                     <div class="card-panel grey darken-2">
                       <span class="white-text">
                       
-                      <span v-for="n in keys"> <img src="key.png" height="27px"> </span>
-                      <span v-for="n in (keysToUnlock-keys)"> <img src="ghostKey.png" height="27px"> </span>
+                      <span v-for="n in keys"> 
+                            <div class="overlapping">
+                                <img src="ghostKey.png" height="27px" style="float: right;">
+                                <img src="key.png" height="27px" style="float: right;" class="fadeImage overlap-bottom">
+                            </div>
+                        
+                      </span>
+                      <span v-for="n in (keysToUnlock-keys)"> 
+                        <img src="ghostKey.png" height="27px" style="float: right;"> 
+                      </span>
                       {{points}}/{{pointsToUnlock}} 
                       </span>
                     </div>
@@ -207,7 +215,9 @@
                 <div class="card-content white-text">
                     <span class="card-title">
                         {{entry.title}}
-                        <img v-if="isrequired" src="key.png" height="27px" style="float: right;">
+                        <div class="overlapping">
+                            <img v-if="isrequired" src="key.png" height="27px" style="float: right;">
+                        </div>
                     </span>
                     <p>
                         {{entry.description}}
@@ -222,7 +232,10 @@
                 <div class="card-content white-text">
                     <span class="card-title">
                         {{entry.title}}
-                        <img v-if="isrequired" src="ghostKey.png" height="27px" style="float: right;">
+                        <div class="overlapping">
+                            <img v-if="isrequired" src="key.png" height="27px" style="float: right;">
+                            <img v-if="isrequired" src="ghostKey.png" height="27px" style="float: right;" class="fadeImage overlap-bottom">
+                        </div>
                     </span>
                     <p>
                         {{entry.description}}
