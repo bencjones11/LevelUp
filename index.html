@@ -94,7 +94,12 @@
                       <span v-for="n in (keysToUnlock-keys)"> 
                         <img src="ghostKey.png" height="27px" style="float: right;"> 
                       </span>
-                      {{points}}/{{pointsToUnlock}} 
+                        
+
+                        <div id="progressbar">
+                            <div v-bind:style="{ width: expBarPercent}"></div>
+                        </div>
+                        {{points}}/{{pointsToUnlock}} 
                       </span>
                     </div>
                   </div>

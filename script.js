@@ -45,6 +45,7 @@ var app = new Vue({
     points: 0,
     keys: 0,
     pointsToUnlock: 120,
+    expBarPercent: "0%",
     keysToUnlock: 2,
     assignmentList: [
       {id:0, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false},
@@ -72,6 +73,7 @@ var app = new Vue({
         if (this.points >= this.pointsToUnlock && this.keys >= this.keysToUnlock) {
             this.locked = false;
         }
+        this.calculateNewExpBarPercentage();
     },
     addNewAssign(newTitle, newdesc, newpoints, newrequired) {
         this.assignmentList.push({id:this.newestAssignId++, title:newTitle, description:newdesc, required:newrequired, points:newpoints, submitted:false});
@@ -80,13 +82,19 @@ var app = new Vue({
             this.pointsToUnlock += newpoints;
         }
         console.log("pressed create button!");
+        this.calculateNewExpBarPercentage();
     },
     updateCurrOpenAssignmentId(arg) {
         console.log("caught event!");
         this.currOpenAssignmentId = arg;
+    },
+    calculateNewExpBarPercentage() {
+        this.expBarPercent = Math.floor((this.points/this.pointsToUnlock)*100).toString() + "%";
     }
   }
 
 })
+
+
 
 
