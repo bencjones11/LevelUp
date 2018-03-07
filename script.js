@@ -49,10 +49,10 @@ var app = new Vue({
     expBarPercent: "0%",
     keysToUnlock: 2,
     assignmentList: [
-      {id:0, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false},
-	  {id:1, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false},
-	  {id:2, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false},
-	  {id:3, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false}
+      {id:0, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false, earnedPoints:0},
+	  {id:1, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false, earnedPoints:0},
+	  {id:2, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false, earnedPoints:0},
+	  {id:3, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false, earnedPoints:0}
     ],
     newestAssignId: 4,
     currOpenAssignmentId: -1
@@ -65,22 +65,27 @@ var app = new Vue({
         var remPoints = this.assignmentList[this.currOpenAssignmentId];
         if(currAssign.submitted === true) {
             if(this.credit === true) {
-                this.points = this.points + (currAssign.points / 2);
+                this.points += currAssign.points - currAssign.earnedPoints;
+                currAssign.earnedPoints = currAssign.points;
             }
             else {
-                this.points = this.points  + (currAssign.points / 4);
+                // this.points = this.points  + (currAssign.points / 4);
+                // currAssign.earnedPoints = currAssign.points/4;
             }
         }
         if(!currAssign.submitted){
             if(this.credit === true) {
                 this.points += currAssign.points;
+                currAssign.earnedPoints = currAssign.points;
             }
             else {
                 this.points = this.points + (currAssign.points / 2);
+                currAssign.earnedPoints = currAssign.points / 2;
             }
             if(currAssign.required){
                 this.keys += 1;
             }
+            
         }
 
         currAssign.submitted = true;
@@ -90,7 +95,7 @@ var app = new Vue({
         this.calculateNewExpBarPercentage();
     },
     addNewAssign(newTitle, newdesc, newpoints, newrequired) {
-        this.assignmentList.push({id:this.newestAssignId++, title:newTitle, description:newdesc, required:newrequired, points:newpoints, submitted:false});
+        this.assignmentList.push({id:this.newestAssignId++, title:newTitle, description:newdesc, required:newrequired, points:newpoints, submitted:false, earnedPoints:0});
         if(newrequired){
             this.keysToUnlock++;
             this.pointsToUnlock += newpoints;
