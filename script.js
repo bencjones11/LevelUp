@@ -49,10 +49,10 @@ var app = new Vue({
     expBarPercent: "0%",
     keysToUnlock: 2,
     assignmentList: [
-      {id:0, title:"Task 1", description:"Write an essay!", required:true, points:50, submitted:false, earnedPoints:0},
-	  {id:1, title:"Task 2", description:"Write another essay!", required:true, points:50, submitted:false, earnedPoints:0},
-	  {id:2, title:"Quiz", description:"Take a quiz!", required:false, points:20, submitted:false, earnedPoints:0},
-	  {id:3, title:"Quiz", description:"Take an alternative quiz!", required:false, points:20, submitted:false, earnedPoints:0}
+      {id:0, title:"Main Quest 1", description:"Write an ancient essay!", required:true, points:50, submitted:false, earnedPoints:0},
+	  {id:1, title:"Main Quest 2", description:"Write another ancient essay!", required:true, points:50, submitted:false, earnedPoints:0},
+	  {id:2, title:"SideQuest 1 - Quiz", description:"Slay a quiz dragon!", required:false, points:20, submitted:false, earnedPoints:0},
+	  {id:3, title:"SideQuest 2 - Quiz", description:"Slay another quiz dragon!", required:false, points:20, submitted:false, earnedPoints:0}
     ],
     newestAssignId: 4,
     currOpenAssignmentId: -1
